@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Tarefas</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .todoapp {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .todoapp h1 {
+        text-align: center;
+    }
+    .todo-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    .todo-item {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    .todo-item input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    .delete-button {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="todoapp">
+    <h1>Lista de Tarefas</h1>
+    <input type="text" id="taskInput" placeholder="Adicionar nova tarefa">
+    <button onclick="addTask()">Adicionar</button>
+    <ul id="taskList" class="todo-list"></ul>
+</div>
+
+<script>
+    function addTask() {
+        var taskInput = document.getElementById("taskInput");
+        var taskList = document.getElementById("taskList");
+
+        if (taskInput.value.trim() === "") {
+            alert("Por favor, insira uma tarefa válida!");
+            return;
+        }
+
+        var li = document.createElement("li");
+        li.className = "todo-item";
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        var taskText = document.createTextNode(taskInput.value);
+        var deleteButton = document.createElement("button");
+        deleteButton.className = "delete-button";
+        deleteButton.innerHTML = "Excluir";
+        deleteButton.onclick = function() {
+            li.remove();
+        };
+
+        li.appendChild(checkbox);
+        li.appendChild(taskText);
+        li.appendChild(deleteButton);
+        taskList.appendChild(li);
+
+        taskInput.value = "";
+    }
+</script>
+</body>
+</html>
